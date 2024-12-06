@@ -11,10 +11,22 @@ FS=="|"{
     for(j=1;j<i;j++){
       if((str[j] SUBSEP str[i] in a) && !a[str[j],str[i]]){
         valid=0
+        tmp = str[i]
+        for(k=i-1;k>=j;k--){
+          str[k+1] = str[k]
+        }
+        str[j] = tmp
+        break
       }
     }
   }
-  if(valid)sum+=sprintf("%d\n",$(NF/2+1))
+  middle = sprintf("%d",NF/2+1)
+  if(valid){
+    sum1+=$(middle)
+  }
+  if(!valid){
+    sum2+=str[middle]
+  }
 }
-END{print sum}
+END{print sum1 "\n" sum2}
 
